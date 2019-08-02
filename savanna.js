@@ -21,11 +21,11 @@ module.exports.test1=async (a)=>{
 		$=cheerio.load(response.body);
 		logo=$(".logo").attr("src");
 		$("div.item-inner").each((i,el)=>{
-			pic=$(el).find('span.cover_image');
+			pic=$(el).find('span.cover_image > img');
 		  	data.push({
 		  		name:$(el).find('h2.productName').text(),
 		  			img:pic.attr("src"),
-		  			url:pic.parent().attr("href"),
+		  			url:pic.parent().parent().attr("href"),
 		  			mark:"",
 					  logo:"https://www.savanna.tn/"+logo,
 		  			price:$(el).find("span.price").text(),

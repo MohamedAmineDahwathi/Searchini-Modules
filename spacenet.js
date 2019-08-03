@@ -21,7 +21,8 @@ module.exports.test1=async (a)=>{
 		body = JSON.parse(response.body)['listing'];
 		
 		$=cheerio.load(body);
-		logo=$(".logo").attr("src");
+		logo="https://medias.spacenet.tn/skin/frontend/spacenet/default/img/space-net.png";
+
 		$(".produits").children().each((i,el)=>{
 			pic=$(el).find('div.item > div.imgcontainer > a > img.img-responsive');
 			data.push({

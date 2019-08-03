@@ -29,7 +29,7 @@ module.exports.test1=async (a)=>{
 				  			url:pic.parent().attr("href"),
 							  mark:"",
 							  logo:logo,
-				  			price:$(el).find(".price").text().trim(),
+				  			price:$(el).find(".price").first().text(),
 				  			oldPrice:null
 				  		});
 		});

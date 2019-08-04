@@ -22,7 +22,6 @@ module.exports.test1=async (a)=>{
 		if(response.statusCode!=200)
 			return;
         $=cheerio.load(response.body);
-        fs.writeFile("test.html",response.body,(e)=>{})
 		$("div.article").each((i,el)=>{
             pic=$(el).find('img');
             title=$(el).find('span.titre_desc');

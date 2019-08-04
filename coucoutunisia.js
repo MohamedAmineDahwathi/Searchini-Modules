@@ -22,11 +22,11 @@ module.exports.test1=async (a)=>{
 			return;
 		$=cheerio.load(response.body);
 		$(".product-item").each((i,el)=>{
-			pic=$(el).find('div.picture');
+			pic=$(el).find('div.picture > a > img');
 		  	data.push({
 		  		name:$(el).find('h2.product-title').text(),
-		  			img:pic.find("img").attr("src"),
-		  			url:"https://www.coucoutunisia.com"+pic.children().eq(0).attr("href"),
+		  			img:pic.attr("src"),
+		  			url:"https://www.coucoutunisia.com"+pic.parent().attr("href"),
 					  mark:"",
 					  logo:"https://d2vg2v96d1ygrx.cloudfront.net/wwwroot/Attachments/ProductPhotos/thumbs/006/0064297_0064297_0.jpg",
 		  			price:$(el).find(".actual-price").text(),

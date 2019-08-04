@@ -6,7 +6,7 @@ const fs=require("fs");
 
 module.exports.test1=async (a)=>{
     var data=[];
-	var post = `{"page_courante":"1","product_par_page":"30","mot_cle":${a}}`
+	var post = `&page_courante=1&product_par_page=30&ordre=croissant&mot_cle=${a}`
 	var x = await  request(
 		{ method: 'POST'
 		, uri: `https://www.scoopgaming.com.tn/catalogue/recherche.php`

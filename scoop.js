@@ -4,7 +4,7 @@ const cheerio=require("cheerio");
 
 module.exports.test1=async (a)=>{
     var data=[];
-	var post = `product_par_page=100&ordre=croissant&mot_cle=${a}`
+	var post = `&page_courante=1&product_par_page=300&ordre=croissant&mot_cle=${a}`
 	var x = await  request(
 		{ method: 'POST'
 		, uri: `https://www.scoop.com.tn/catalogue/recherche.php`

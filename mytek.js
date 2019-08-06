@@ -4,6 +4,7 @@ const cheerio=require("cheerio");
 
 module.exports.test1=async (a,n=300)=>{
 	var data=[];
+	//console.log("dsqdsqd");
 	var x = await  request(
 		{ method: 'POST'
 		, uri: `https://www.mytek.tn/recherche?controller=search&search_query=${a}&n=${n}`

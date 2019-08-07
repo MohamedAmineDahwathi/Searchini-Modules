@@ -24,7 +24,7 @@ module.exports.test1=async (a)=>{
   }
   var options = { method: 'GET'
   , uri: `https://www.mega-pc.net/?s=${a}&post_type=product&type_aws=true`
-  //, gzip: true
+  , gzip: true
   //, body : post
   ,  headers: {
     'X-Requested-With': 'XMLHttpRequest' ,

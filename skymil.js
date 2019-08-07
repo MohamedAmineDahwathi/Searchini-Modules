@@ -31,7 +31,6 @@ module.exports.test1=async (a)=>{
 	.then((response)=>{
 		if(response.statusCode!=200)
 			return;
-    $=cheerio.load(response.body);
     scrapper(response.body);
 
 	}).catch(function (err) {

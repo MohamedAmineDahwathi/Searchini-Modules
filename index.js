@@ -2,7 +2,13 @@ var chokidar = require('chokidar');
 const path = require('path');
 var fs = require('fs');
 
-var watcher = chokidar.watch( __dirname , {ignored: /^\./, persistent: true});
+var watcher = chokidar.watch( __dirname , {ignored: /^\./,
+   persistent: true ,
+   awaitWriteFinish: {
+    stabilityThreshold: 2000,
+    pollInterval: 100
+  },
+});
 
 /*
 fs.readdirSync(__dirname).forEach(function (file) {
@@ -11,20 +17,24 @@ fs.readdirSync(__dirname).forEach(function (file) {
 
   module.exports[file.replace('.js','')] = require( './' + file);
 });
-*/
 
+fs.watch(__dirname, (eventType, filename) => {
+console.log(eventType);
+console.log(filename);
+}) */
 watcher
   .on('add', function(uri)    {
     var file = path.basename(uri, '.js') ;
     if ( path.extname(uri) == '.js' && file != 'index' ) {
-    module.exports[file] = require( './' + file);
+    module.exports[file] = require( './' + file, true );
     console.log('Module', file , 'has been added'); }
   })
-  .on('change', function(uri) {
+  .on('change',  function(uri,stat) {
     var file = path.basename(uri, '.js') ;
     if (module.exports[file]) {
+    delete require.cache[uri]
     delete module.exports[file] ;
-    module.exports[file] = require( './' + file);
+    module.exports[file] = require('./' + file, true );
     console.log('Module', file , 'has been changed');}
   })
   .on('unlink', function(uri) {

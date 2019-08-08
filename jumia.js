@@ -25,7 +25,7 @@ module.exports.test1=async (a)=>{
 			{
 				oldPricee=$(el).find("span.-old");
 				data.push({
-					name:$(el).find('span.name').text(),
+					name:namee,
 					 img:$(el).find('img').attr("data-src"),
 					 url:$(el).find('a.link').attr("href"),
 					 mark:"",
@@ -36,7 +36,7 @@ module.exports.test1=async (a)=>{
 			}
 		});
 		 if(maxPage==2)
-			maxPage=$("ul.osh-pagination").find("li").last().prev().text();
+			maxPage=$("ul.osh-pagination > li").last().prev().text();
 		
 
 	}).catch(function (err) {

@@ -28,8 +28,8 @@ module.exports.test1=async (a)=>{
 		  			url:pic.parent().attr("href"),
 		  			mark:"",
 					  logo:logo,
-		  			price:$(el).find("span.price").text().trim().split(" ")[0],
-		  			oldPrice:$(el).find("span.old-price").text().trim().split(" ")[0]
+		  			price:$(el).find("span.price").first().text(),
+		  			oldPrice:$(el).find("span.old-price").first().text()
 		  		});
 		});
 

@@ -31,7 +31,7 @@ var x=await  request(options)
 			  			url:pic.parent().attr("href"),
 						  mark:"",
 						  logo:logo,
-			  			price:$(el).find("span.price").text().trim().split(" ")[0],
+			  			price:$(el).find(".product-price").first().text(),
 			  			oldPrice:null
 			  		});
 			  	}

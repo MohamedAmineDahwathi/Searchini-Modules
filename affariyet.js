@@ -5,17 +5,13 @@ const cheerio=require("cheerio");
 module.exports.test1=async (a)=>{
 	var data=[];
 
-	var maxPage=2;
-	j=1;
-	while(j<=maxPage){
-		
-		var options={ method: 'GET'
-		    , uri: `https://www.affariyet.com/recherche?s=${a}&page=${j}`
-			, gzip: true
-			,resolveWithFullResponse: true
-		    };
+	var options={ method: 'GET'
+		, uri: `https://www.affariyet.com/recherche?s=${a}&from-xhr`
+		, gzip: true
+		,resolveWithFullResponse: true
+	};
 	var x=await  request(options)
-	.then( (response)=>{
+	.then( async (response)=>{
 		if(response.statusCode!=200)
 			return;
 		$=cheerio.load(response.body);
@@ -35,13 +31,49 @@ module.exports.test1=async (a)=>{
 			  			oldPrice:$(el).find("span.regular-price").text()
 			  		});
 		});
-		if(maxPage==2)
-		 maxPage=$("ul.page-list > li").last().prev().text();
+		var maxPage=$("ul.page-list > li ").last().prev().text();
+		var arrayRequest=[];
+		while((--maxPage)>0){
+			options.uri=`https://www.affariyet.com/recherche?s=${a}&from-xhr&page=${maxPage+1}`;
+			arrayRequest.unshift(
+					request(options)			  
+				
+				);
+		}
+			await Promise.all(arrayRequest)
+				.then(requestsData=>{
+					 requestsData.forEach(response=>{
+								if(response.statusCode!=200)
+									return;
+									
+								$=cheerio.load(response.body);
+								$("article.product-miniature").each((i,el)=>{
+									namee=$(el).find('h5.product-name').text().trim();
+									pic=$(el).find("a.product-cover-link > img");
+									// there is a lot of empty prod so i test if the name is not empty i get it
+									if(namee)
+										  data.push({
+											  name:namee,
+												  img:pic.attr("src"),
+												  url:pic.parent().attr("href"),
+												mark:"",
+												logo:"",
+												  price:$(el).find("span.price.product-price").text(),
+												  oldPrice:$(el).find("span.regular-price").text()
+											  });
+									
+								});
+							}						
+						);
+					}).catch(error => { 
+					console.log(error.message)
+				  });
+		
+
+		
 	}).catch(function (err) {
-        console.log("err");
+        console.log(err);
     })
 
-	j++;
-	}
 	return data;
 }

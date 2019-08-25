@@ -26,7 +26,7 @@ module.exports.test1=async (a)=>{
 			  			img:pic.attr("src"),
 			  			url:pic.parent().attr("href"),
 						mark:"",
-						logo:"",
+						logo:"https://www.affariyet.com/img/cms/328x86xLOGO,P20AFFARIYET-01.jpg.pagespeed.ic.kBsG3KRT7N.webp",
 			  			price:$(el).find("span.price.product-price").text(),
 			  			oldPrice:$(el).find("span.regular-price").text()
 			  		});
@@ -57,7 +57,7 @@ module.exports.test1=async (a)=>{
 												  img:pic.attr("src"),
 												  url:pic.parent().attr("href"),
 												mark:"",
-												logo:"",
+												logo:"https://www.affariyet.com/img/cms/328x86xLOGO,P20AFFARIYET-01.jpg.pagespeed.ic.kBsG3KRT7N.webp",
 												  price:$(el).find("span.price.product-price").text(),
 												  oldPrice:$(el).find("span.regular-price").text()
 											  });

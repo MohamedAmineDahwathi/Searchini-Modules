@@ -28,8 +28,8 @@ module.exports.test1=async (a)=>{
              url: 'https://www.bershka.com/tn/' + elem['productNameEn'].toLowerCase().replace(/ /g,"-") + '-c0p' + elem['json']['id']  + '.html?colorId=' + elem['json']['colorId'] ,
             mark:"",
             logo: 'https://www.bershka.com/static/itxwebstandard/images/logo.svg?t=2019072318512321db1451745598',
-           price: elem['json']['minPrice'],
-        oldPrice: elem['json']['minOldPrice']
+           price: elem['json']['minPrice']  / 100 ,
+        oldPrice: elem['json']['minOldPrice'] / 100
             });
       });
 	}).catch(function (err) {

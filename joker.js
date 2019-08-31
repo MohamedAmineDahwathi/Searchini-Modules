@@ -13,7 +13,7 @@ module.exports.test1=async (a)=>{
            img: $(elem).find("div > div > form > div.ann-image-1 > p > img").attr("src") ,
            url: $(elem).attr("href") ,
           mark:"",
-          logo: $("body > form:nth-child(3) > div > a:nth-child(1) > img").attr("src"),
+          logo: "https://www.joker.tn//assets/images/logojoker.png",
          price: $(elem).find("div > div > form > div.price-div > span").eq(0).text() ,
       oldPrice: $(elem).find('div > div > form > div.price-div > del > span').text()
           });

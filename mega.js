@@ -13,7 +13,7 @@ module.exports.test1=async (a)=>{
         //console.log(product.children('attachment-woocommerce_thumbnail size-woocommerce_thumbnail').src());
       data.push({
           name:product.children('.woocommerce-loop-product__title').text(),
-            img:product.children('attachment-woocommerce_thumbnail size-woocommerce_thumbnail').attr("src"),
+            img:product.children('img').attr("src"),
             url:product.attr("href"),
           mark:"",
           logo:$('body > div.header > nav.navbar.container > div > div.navbar-header > a > img.mob-nav').attr("src"),

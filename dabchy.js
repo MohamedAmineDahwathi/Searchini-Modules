@@ -8,7 +8,7 @@ module.exports.test1=async (a)=>{
   var post = `{"q":"${a}"}` ;
   var j=0;
   var options = { method: 'POST'
-  , uri: `https://api.dabchy.com/api/public/article?page=${j}&size=1000&sort=user.lastLoginDate,desc`
+  , uri: `https://api.dabchy.com/api/public/article?page=${j}&size=10000&sort=user.lastLoginDate,desc`
   , gzip: true
   ,body:post
   ,  headers: {
@@ -20,7 +20,8 @@ module.exports.test1=async (a)=>{
 	.then( async (response)=>{
 		if(response.statusCode!=200)
 			return;
-      var products = JSON.parse(response.body);
+      data.push(JSON.parse(response.body))
+  /*    var products = JSON.parse(response.body);
       var logo="https://www.dabchy.com/assets/images/logo2-4x.png";
       products['content'].forEach(elem => {
         data.push({
@@ -32,7 +33,7 @@ module.exports.test1=async (a)=>{
            price: elem['prixVente'],
         oldPrice: elem['prixAchat']
             });
-      });
+      }); */
 	}).catch(function (err) {
         console.log(err);
     })

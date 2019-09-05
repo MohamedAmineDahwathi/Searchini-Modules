@@ -6,7 +6,7 @@ const fs=require("fs");
 
 module.exports.test1=async (a)=>{
 	var data=[];
-	var options={ 
+	var options={
 		method: 'GET'
 		, uri: `https://www.decathlon.tn/search?controller=search&s=${a}`
 		, gzip: true
@@ -22,14 +22,14 @@ module.exports.test1=async (a)=>{
 				pic=$(el).find(".img-box-single > img")
 				data.push({
 					name:$(el).find('.title-single').text(),
-					 img:pic.attr("src"),
+					 img:$(el).find('div.img-box-single > .img-responsive ').attr("data-src"),
 					 url:pic.parent().parent().parent().attr("href"),
 					 mark:"",
 					 logo:logo,
 					 price:$(el).find(".price-text-btn > button").text(),
 					 oldPrice:null
 					});
-			
+
 		});
 
 		maxPage=$(".page-list > ul > li").last().prev().text();
@@ -37,8 +37,8 @@ module.exports.test1=async (a)=>{
 		while((--maxPage)>0){
 			options.uri=`https://www.decathlon.tn/search?controller=search&s=${a}&page=${maxPage+1}`;
 			arrayRequest.unshift(
-					request(options)			  
-				
+					request(options)
+
 				);
 		}
 
@@ -60,11 +60,11 @@ module.exports.test1=async (a)=>{
 								 price:$(el).find(".price-text-btn > button").text(),
 								 oldPrice:null
 								});
-						
+
 					});
-							}						
+							}
 						);
-					}).catch(error => { 
+					}).catch(error => {
 					console.log(error.message)
 				  });
 

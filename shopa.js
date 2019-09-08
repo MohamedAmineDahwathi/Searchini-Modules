@@ -15,7 +15,7 @@ module.exports.test1=async (a)=>{
           mark:"",
           logo: $("#site-header > div.header-main-wapper > div > div > div > div.header-logo.col-md-3.col-sm-3 > div.d-logo > div > a > img").attr("src"),
          price: $(elem).find("div > div > div > span > ins > span").eq(0).text() ,
-      oldPrice: $(elem).find('div > div > div > span > del > span').text()
+      oldPrice: $(elem).find('div > div > div > span > del > span').eq(0).text()
           });
       return data
     });

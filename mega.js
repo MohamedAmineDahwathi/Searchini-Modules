@@ -11,14 +11,16 @@ module.exports.test1=async (a)=>{
     $('body > div:nth-child(3) > div > ul').children().each((i,el)=>{
         var product = $(el).children('.woocommerce-LoopProduct-link.woocommerce-loop-product__link')
         //console.log(product.children('attachment-woocommerce_thumbnail size-woocommerce_thumbnail').src());
-      data.push({
-          name:product.children('.woocommerce-loop-product__title').text(),
-            img:product.children('img').attr("src"),
-            url:product.attr("href"),
-          mark:"",
-          logo:$('body > div.header > nav.navbar.container > div > div.navbar-header > a > img.mob-nav').attr("src"),
-            price:product.children('.price').text(),
-            oldPrice:null
+        const price=product.children('.price').find('.woocommerce-Price-amount,.amount');
+        
+        data.push({
+            name:product.children('.woocommerce-loop-product__title').text(),
+              img:product.children('img').attr("src"),
+              url:product.attr("href"),
+            mark:"",
+            logo:$('body > div.header > nav.navbar.container > div > div.navbar-header > a > img.mob-nav').attr("src"),
+              price:price.last().text().replace(',',''),
+              oldPrice:price.first().text().replace(',','')
           });
     });
   }

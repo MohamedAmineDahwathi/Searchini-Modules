@@ -9,6 +9,7 @@ module.exports.test1=async (a)=>{
 		    , uri: `http://www.sbsinformatique.com/search.asp?ob=&sw=&Keyword=${a}`
 		    , gzip: true
 		    ,resolveWithFullResponse: true
+		    ,encoding: "text/html;charset='iso-8859-1'"
 		    };
 	var x=await  request(options)
 	.then( async(response)=>{
@@ -21,6 +22,7 @@ module.exports.test1=async (a)=>{
             {   
                 name=$(el).find('b');
                 pic=$(el).find(" tr > td > a > img");
+                console.log(name.first().text());
 				data.push({
 					name:name.first().text(),
 					 img:"http://www.sbsinformatique.com/"+pic.attr("src"),

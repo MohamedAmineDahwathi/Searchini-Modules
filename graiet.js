@@ -24,7 +24,7 @@ var x=await  request(options)
 		  			url:pic.attr("href"),
 					  mark:$(el).find('ul.show-brand').text(),
 					  logo:logo,
-		  			price:$(el).find("span.woocommerce-Price-amount").text(),
+		  			price:$(el).find("span.woocommerce-Price-amount").text().replace('د.ت','').replace('.',''),
 		  			oldPrice:null
 		  		});
 		});

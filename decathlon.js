@@ -17,7 +17,7 @@ module.exports.test1=async (a)=>{
         if(response.statusCode!=200)
 			return;
         $=cheerio.load(response.body);
-		logo="https://www.decathlon.tn/"+$("img.logo").attr("src");
+		logo="https://scontent.ftun1-1.fna.fbcdn.net/v/t1.0-9/16427464_633790196808854_73996400429269172_n.jpg?_nc_cat=109&_nc_oc=AQnP93LGlyOVZr2SL8Uleig9rJ6gv_FzC7sUFwwJyGrL4lavGNcgh8cK-y4CnBpFVfY&_nc_ht=scontent.ftun1-1.fna&oh=b91e5dc85cbe5ead55e8631e6a0316b6&oe=5E0D6785";
 		$("div.item-product").each((i,el)=>{
 				pic=$(el).find(".img-box-single > img")
 				data.push({

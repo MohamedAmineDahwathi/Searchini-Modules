@@ -19,12 +19,14 @@ module.exports.test1=async (a)=>{
 		logo=$("div.logo > a > img").attr("src");
 		$("div.sku,div.-gallery").each((i,el)=>{
 			namee=$(el).find('span.name').text();
+
 			if(namee)
 			{
 				oldPricee=$(el).find("span.-old");
+
 				data.push({
 					name:namee,
-					 img:$(el).find('.image-wrapper > img').attr("data-src"),
+					 img:$(el).find('img').last().attr("data-src"),
 					 url:$(el).find('a.link').attr("href"),
 					 mark:"",
 					 logo:logo,
@@ -57,7 +59,7 @@ module.exports.test1=async (a)=>{
 							oldPricee=$(el).find("span.-old");
 							data.push({
 								name:namee,
-								 img:$(el).find('img').attr("data-src"),
+								 img:$(el).find('img').last().attr("data-src"),
 								 url:$(el).find('a.link').attr("href"),
 								 mark:"",
 								 logo:logo,

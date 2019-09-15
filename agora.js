@@ -22,16 +22,23 @@ module.exports.test1=async (a)=>{
 		logo=$(".logo > img").attr("src");
 		$("li.ajax_block_product ").each((i,el)=>{
 
-			pic=$(el).find("a.product_img_link > img");
-				  	data.push({
-				  		name:$(el).find("h5.product-name").text(),
-				  			img:pic.attr("src"),
-				  			url:pic.parent().attr("href"),
-							  mark:"",
-							  logo:logo,
-				  			price:$(el).find(".price").first().text(),
-				  			oldPrice:null
-				  		});
+			price=$(el).find(".price").first().text();
+
+
+			console.log(price);
+
+			if(price!='')
+			{pic=$(el).find("a.product_img_link > img");
+			
+							  	data.push({
+							  		name:$(el).find("h5.product-name").text(),
+							  			img:pic.attr("src"),
+							  			url:pic.parent().attr("href"),
+										  mark:"",
+										  logo:logo,
+							  			price:price,
+							  			oldPrice:null
+							  		});}
 		});
 
 	}).catch(function (err) {

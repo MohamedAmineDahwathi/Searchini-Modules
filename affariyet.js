@@ -41,8 +41,8 @@ module.exports.test1=async (a)=>{
 		while((--maxPage)>0){
 			options.uri=`https://www.affariyet.com/recherche?order=product.price.desc&s=${a}&from-xhr&page=${maxPage+1}`;
 			arrayRequest.unshift(
-					request(options)			  
-				
+					request(options)
+
 				);
 		}
 			await Promise.all(arrayRequest)
@@ -55,12 +55,12 @@ module.exports.test1=async (a)=>{
 								
 							}						
 						);
-					}).catch(error => { 
+					}).catch(error => {
 					console.log(error.message)
 				  });
-		
 
-		
+
+
 	}).catch(function (err) {
         console.log(err);
     })

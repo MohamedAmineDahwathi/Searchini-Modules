@@ -1,15 +1,34 @@
 const request=require("request-promise");
 const cheerio=require("cheerio");
-const fs=require("fs");
 
+var data=[];
+var maxPage=null;
+ scrapper=body=>{
+	$=cheerio.load(body);
+	
+	logo="https://www.decathlon.tn/"+$("img.logo").attr("src");
+	$("div.item-product").each((i,el)=>{
+			pic=$(el).find(".img-box-single > img")
+			data.push({
+				name:$(el).find('.title-single').text(),
+				 img:$(el).find('.img-responsive').attr("data-src"),
+				 url:pic.parent().parent().parent().attr("href"),
+				 mark:"",
+				 logo:logo,
+				 price:parseFloat($(el).find(".price-text-btn > button").text().replace(',','.')),
+				 oldPrice:null
+				});
 
+	});
+	
+	maxPage=$(".page-list > ul > li").last().prev().text();
+}
 
 module.exports.test1=async (a)=>{
-	var data=[];
 
   	var post = `{"q":"${a}"}` ;
 	var options={
-		method: 'POST'
+		method: 'GET'
 		, uri: `https://www.decathlon.tn/search?controller=search&page=1&s=${a}&from-xhr`
 		, gzip: true
 		,  headers: {
@@ -22,23 +41,8 @@ module.exports.test1=async (a)=>{
 	.then( async (response)=>{
 		if(response.statusCode!=200)
 			return;
-		$=cheerio.load(response.body);
-		logo="https://www.decathlon.tn/"+$("img.logo").attr("src");
-		$("div.item-product").each((i,el)=>{
-				pic=$(el).find(".img-box-single > img")
-				data.push({
-					name:$(el).find('.title-single').text(),
-					 img:$(el).find('.img-responsive').attr("data-src"),
-					 url:pic.parent().parent().parent().attr("href"),
-					 mark:"",
-					 logo:logo,
-					 price:$(el).find(".price-text-btn > button").text(),
-					 oldPrice:null
-					});
-
-		});
-
-		maxPage=$(".page-list > ul > li").last().prev().text();
+			
+		scrapper(response.body);
 		var arrayRequest=[];
 		while((--maxPage)>0){
 			options.uri=`https://www.decathlon.tn/search?controller=search&s=${a}&page=${maxPage+1}`;
@@ -50,26 +54,11 @@ module.exports.test1=async (a)=>{
 
 		await Promise.all(arrayRequest)
 				.then(requestsData=>{
-					 requestsData.forEach(response=>{
-		if(response.statusCode!=200)
-			return;
-		$=cheerio.load(response.body);
-						logo="https://www.decathlon.tn/"+$("img.logo").attr("src");
-						$("div.item-product").each((i,el)=>{
-							pic=$(el).find(".img-box-single > img")
-							data.push({
-								name:$(el).find('.title-single').text(),
-								 img:pic.attr("data-src"),
-								 url:pic.parent().parent().parent().attr("href"),
-								 mark:"",
-								 logo:logo,
-								 price:$(el).find(".price-text-btn > button").text(),
-								 oldPrice:null
-								});
-
-					});
-							}
-						);
+					requestsData.forEach(response=>{
+						if(response.statusCode!=200)
+							return;
+						scrapper(response.body);
+						});
 					}).catch(error => {
 					console.log(error.message)
 				  });

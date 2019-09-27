@@ -29,7 +29,7 @@ module.exports.test1=async (a)=>{
 		  			url:"https://www.coucoutunisia.com"+pic.parent().attr("href"),
 					  mark:"",
 					  logo:"https://d2vg2v96d1ygrx.cloudfront.net/wwwroot/Attachments/ProductPhotos/thumbs/006/0064297_0064297_0.jpg",
-		  			price:$(el).find(".actual-price").text(),
+		  			price:parseFloat($(el).find(".actual-price").text()),
 		  			oldPrice:$(el).find(".old-price").text()
 		  		});
 		});

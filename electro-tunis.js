@@ -7,7 +7,7 @@ module.exports.test1=async (a,n=150)=>{
 	var data=[];
 	var x = await  request(
 		{ method: 'GET'
-		, uri: `http://www.electro-tunis.tn/recherche?search_query=${a}&orderby=position&orderway=desc&search_query=${a}&submit_search=&n=${n}`
+		, uri: `http://www.electro-tunis.tn/recherche?search_query=${a}&orderway=desc&submit_search=&n=${n}`
         , gzip: true
         
         ,resolveWithFullResponse: true
@@ -28,8 +28,8 @@ module.exports.test1=async (a,n=150)=>{
                     url:pic.parent().attr("href"),
                     mark:"",
                     logo:logo,
-                    price:price.text(),           
-                    oldPrice:price.prev().text()
+                    price:parseFloat(price.text().replace(',','.')),           
+                    oldPrice:parseFloat(price.prev().text().replace(',','.'))
                             
                 });
             }

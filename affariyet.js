@@ -3,7 +3,7 @@ const cheerio=require("cheerio");
 
 var data=[];
 var maxPage=null;
- scrapper=body=>{
+var scrapper=body=>{
 	$=cheerio.load(body);
 	$("article.product-miniature").each((i,el)=>{
 		namee=$(el).find('h5.product-name').text().trim();

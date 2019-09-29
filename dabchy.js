@@ -21,7 +21,19 @@ module.exports.test1=async (a)=>{
 		if(response.statusCode!=200)
 			return;
       data.push(JSON.parse(response.body))
-	}).catch(function (err) {
+      /*
+      
+      data.push({
+        name:response.body.titre,
+          img:response.body.thumbnail,
+          url:"https://www.dabchy.com/article/"+response.body.id,
+        mark:"",
+        logo:"https://www.dabchy.com/assets/images/logo2-4x.png",
+          price:parseFloat(response.body.prixVente).toFixed(3),
+          oldPrice:parseFloat(response.body.prixAchat).toFixed(3)
+        })
+      */
+    }).catch(function (err) {
         console.log(err);
     })
 

@@ -12,8 +12,8 @@ module.exports.test1=async (a)=>{
            url: $(el).find('div > div > div > div > h5 > a').attr("href"),
           mark:"",
           logo: $('#header_logo > a > img').attr("src"),
-         price: $(el).find('div > div > div > div > div > div > div > span').eq(0).text().trim().replace("'",''),
-      oldPrice: $(el).find('div > div > div > div > div > div > div > span').eq(1).text().trim().replace("'",'')
+         price: parseFloat($(el).find('div > div > div > div > div > div > div > span').eq(0).text().trim().replace("'",'')).toFixed(3),
+      oldPrice: parseFloat($(el).find('div > div > div > div > div > div > div > span').eq(1).text().trim().replace("'",'')).toFixed(3)
           });
     });
   }

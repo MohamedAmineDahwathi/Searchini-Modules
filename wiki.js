@@ -30,7 +30,7 @@ module.exports.test1=async (a,n=200)=>{
 				  			img:pic.attr("src"),
 				  			url:pic.parent().attr("href"),
 				  			mark:$(el).find('.logo_marque > img').attr('alt'),
-				  			price:$(el).find("div.content_price").text(),
+				  			price:parseFloat($(el).find("div.content_price").text().replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')).toFixed(3),
 							  logo:logo,
 				  			oldPrice:null
 				  		});

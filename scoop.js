@@ -22,7 +22,7 @@ module.exports.test1=async (a)=>{
         $=cheerio.load(response.body);
 
 		$("div.article").each((i,el)=>{
-            pic=$(el).find('img');
+            pic=$(el).children().first().find('img');
             title=$(el).find('span.titre_desc');
 		  	data.push({
 		  		name:title.text(),
@@ -30,7 +30,7 @@ module.exports.test1=async (a)=>{
 		  			url:"https://www.scoop.com.tn/"+title.children().eq(0).attr("href"),
 					mark:"https://www.scoop.com.tn/"+pic.first().attr("src"),
 					logo:"https://www.scoop.com.tn/images/scoop-logo-tn.png",
-		  			price:$(el).find(".prix_article").text(),
+		  			price:parseFloat($(el).find(".prix_article").text()).toFixed(3),
 		  			oldPrice:null
 		  		});
 		});

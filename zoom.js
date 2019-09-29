@@ -31,8 +31,8 @@ module.exports.test1=async (a)=>{
 				  			url:pic.attr("href"),
 				  			mark:$(el).find("div.marque").text(),
 							  logo:logo,
-				  			price:price.first().text(),
-				  			oldPrice:price.last().text(),
+				  			price:parseFloat(price.first().text().replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')).toFixed(3),
+				  			oldPrice:parseFloat(price.last().text().replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')).toFixed(3),
 				  		});
 				}
 		});

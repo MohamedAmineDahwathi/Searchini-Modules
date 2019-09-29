@@ -25,13 +25,14 @@ module.exports.test1=async (a)=>{
 
 		$(".produits").children().each((i,el)=>{
 			pic=$(el).find('div.item > div.imgcontainer > a > img.img-responsive');
+			url=$(el).find('div.content > h2 > a');
 			data.push({
-		  		name:$(el).find('div.content > h2').text().trim(),
+		  		name:url.text().trim(),
 		  			img:pic.attr("data-src"),
-		  			url:pic.parent().attr("href"),
+		  			url:url.attr("href"),
 		  			mark:"",
 					logo:logo,
-		  			price:$(el).find("span.price").text(),
+		  			price:parseFloat($(el).find("span.price").text().replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')).toFixed(3),
 		  			oldPrice:null
 		  		});
 		});

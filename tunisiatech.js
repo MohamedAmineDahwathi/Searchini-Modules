@@ -19,8 +19,8 @@ var scrapper=body=>{
                         url:pic.parent().attr("href"),
                         mark:"",
                         logo:logo,
-                        price:price.text(),
-                        oldPrice:price.parent().prev().prev().prev().text()
+                        price:parseFloat(price.text().replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')).toFixed(3),
+                        oldPrice:parseFloat(price.parent().prev().prev().prev().text().replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')).toFixed(3)
                         });
                 
             });

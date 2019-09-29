@@ -14,8 +14,8 @@ module.exports.test1=async (a)=>{
            url: $(elem).find("div > div.mf-product-thumbnail > a").attr("href") ,
           mark:"",
           logo: $("#site-header > div.header-main-wapper > div > div > div > div.header-logo.col-md-3.col-sm-3 > div.d-logo > div > a > img").attr("src"),
-         price: $(elem).find("div > div > div > span > ins > span").eq(0).text() ,
-      oldPrice: $(elem).find('div > div > div > span > del > span').eq(0).text()
+         price: parseFloat($(elem).find("div > div > div > span > ins > span").eq(0).text()).toFixed(3) ,
+      oldPrice: parseFloat($(elem).find('div > div > div > span > del > span').eq(0).text()).toFixed(3)
           });
       return data
     });

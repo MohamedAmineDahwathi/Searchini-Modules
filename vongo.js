@@ -18,8 +18,8 @@ var scrapper=body=>{
 		  			url:pic.parent().attr("href"),
 		  			mark:"",
 					logo:"https://www.vongo.tn/"+logo,
-		  			price:price.first().text(),
-		  			oldPrice:price.last().text()
+		  			price:parseFloat(price.first().text()).toFixed(3),
+		  			oldPrice:parseFloat(price.last().text().replace(',','.')).toFixed(3)
 		  		});
 		});
 		

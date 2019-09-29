@@ -31,7 +31,7 @@ module.exports.test1=async (a,n=300)=>{
 				  			url:pic.parent().attr("href"),
 				  			mark:"",
 							logo:logo,
-				  			price:parseFloat($(el).find("span.price").text().replace(',','.')),
+				  			price:parseFloat($(el).find("span.price").text().replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')).toFixed(3),
 				  			oldPrice:null
 				  		});
 				  }

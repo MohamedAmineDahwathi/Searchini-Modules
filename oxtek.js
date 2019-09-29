@@ -28,8 +28,8 @@ module.exports.test1=async (a)=>{
 		  			url:body[i]['canonical_url'],
 		  			mark:"",
 					  logo:logo,
-		  			price:body[i]['price'],
-		  			oldPrice:body[i]['price_without_reduction']
+		  			price:parseFloat(body[i]['price'].toString().replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')).toFixed(3),
+		  			oldPrice:parseFloat(body[i]['price_without_reduction'].toString().replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')).toFixed(3)
 		  		});
 		}
 

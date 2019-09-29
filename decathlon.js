@@ -15,7 +15,7 @@ var maxPage=null;
 				 url:pic.parent().parent().parent().attr("href"),
 				 mark:"",
 				 logo:logo,
-				 price:parseFloat($(el).find(".price-text-btn > button").text().replace(',','.')),
+				 price:parseFloat($(el).find(".price-text-btn > button").text().replace(',','.')).toFixed(3),
 				 oldPrice:null
 				});
 

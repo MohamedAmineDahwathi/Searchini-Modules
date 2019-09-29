@@ -2,19 +2,10 @@ const request=require("request-promise");
 const cheerio=require("cheerio");
 
 
-module.exports.test1=async (a)=>{
-	var data=[];
-
-	var options={ method: 'GET'
-		    , uri: `https://informatica.tn/recherche?search_query=${a}`
-		    , gzip: true
-			,resolveWithFullResponse: true
-		};
-var x=await  request(options)
-.then( async(response)=>{
-	if(response.statusCode!=200)
-		return;
-	$=cheerio.load(response.body);
+var data=[];
+var maxPage=null;
+var scrapper=body=>{
+	$=cheerio.load(body);
 		logo=$(".logo").attr("src");
 
 		$("li.ajax_block_product").each((i,el)=>{
@@ -27,16 +18,32 @@ var x=await  request(options)
 			  			url:pic.parent().attr("href"),
 						  mark:"",
 						  logo:logo,
-			  			price:$(el).find(".product-price").first().text(),
+			  			price:parseFloat($(el).find(".product-price").first().text().replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')).toFixed(3),
 			  			oldPrice:null
 			  		});
 			  	}
 		});
 		
 		maxPage=$("ul.pagination > li ").last().prev().text();
+
+
+}
+module.exports.test1=async (a)=>{
+	
+
+	var options={ method: 'GET'
+		    , uri: `https://informatica.tn/recherche?search_query=${a}&orderway=desc`
+		    , gzip: true
+			,resolveWithFullResponse: true
+		};
+var x=await  request(options)
+.then( async(response)=>{
+	if(response.statusCode!=200)
+		return;
+		scrapper(response.body)
 		var arrayRequest=[];
 		while((--maxPage)>0){
-			options.uri=`https://informatica.tn/recherche?search_query=${a}&p=${maxPage+1}`;
+			options.uri=`https://informatica.tn/recherche?search_query=${a}&p=${maxPage+1}&orderway=desc`;
 			arrayRequest.unshift(
 					request(options)			  
 				
@@ -47,26 +54,8 @@ var x=await  request(options)
 					 requestsData.forEach(response=>{
 						if(response.statusCode!=200)
 						return;
-					$=cheerio.load(response.body);
-						logo=$(".logo").attr("src");
-				
-						$("li.ajax_block_product").each((i,el)=>{
-				
-							if($(el).find("span.availability").text().trim()!= "Rupture de stock")
-								  {	pic=$(el).find('a.product_img_link > img');
-									  data.push({
-									  name:$(el).find('a.product-name').text(),
-										  img:pic.attr("src"),
-										  url:pic.parent().attr("href"),
-										  mark:"",
-										  logo:logo,
-										  price:$(el).find(".product-price").first().text(),
-										  oldPrice:null
-									  });
-								  }
-						});
-							}						
-						);
+						scrapper(response.body);
+					});
 					}).catch(error => { 
 					console.log(error.message)
 				  });

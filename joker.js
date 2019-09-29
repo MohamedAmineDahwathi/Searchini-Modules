@@ -14,8 +14,8 @@ module.exports.test1=async (a)=>{
            url: $(elem).attr("href") ,
           mark:"",
           logo: "https://www.joker.tn//assets/images/logojoker.png",
-         price: $(elem).find("div > div > form > div.price-div > span").eq(0).text() ,
-      oldPrice: $(elem).find('div > div > form > div.price-div > del > span').text()
+         price: parseFloat($(elem).find("div > div > form > div.price-div > span").eq(0).text().replace(',','')).toFixed(3) ,
+      oldPrice: parseFloat($(elem).find('div > div > form > div.price-div > del > span').text().replace(',','')).toFixed(3)
           });
       return data
     });

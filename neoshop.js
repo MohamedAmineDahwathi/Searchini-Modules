@@ -7,7 +7,7 @@ module.exports.test1=async (a)=>{
 	var data=[];
 	var x = await  request(
 		{ method: 'GET'
-		, uri: `http://www.neoshop.tn/recherche?search_query=${a}`
+		, uri: `http://www.neoshop.tn/recherche?search_query=${a}&orderway=desc`
 		, gzip: true
 		,  headers: {
 			'X-Requested-With': 'XMLHttpRequest' ,
@@ -28,8 +28,8 @@ module.exports.test1=async (a)=>{
 		  			url:pic.parent().attr("href"),
 		  			mark:"",
 					  logo:logo,
-		  			price:$(el).find("span.price").first().text(),
-		  			oldPrice:$(el).find("span.old-price").first().text()
+		  			price:parseFloat($(el).find("span.price").first().text().replace(',','.')).toFixed(3),
+		  			oldPrice:parseFloat($(el).find("span.old-price").first().text().replace(',','.')).toFixed(3)
 		  		});
 		});
 

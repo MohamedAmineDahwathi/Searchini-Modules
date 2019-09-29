@@ -35,7 +35,7 @@ module.exports.test1=async (a)=>{
 					url:pic.parent().attr("href"),
 					mark:"",
 					logo:logo,
-					price:parseFloat(price.replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')),
+					price:parseFloat(price.replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')).toFixed(3),
 					oldPrice:null
 					});
 			}

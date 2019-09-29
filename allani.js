@@ -28,7 +28,7 @@ module.exports.test1=async (a)=>{
 				  			url:pic.parent().attr("href"),
 				  			mark:$(el).find(".manufacturerdetail1 > img ").attr("alt"),
 							logo:logo,
-				  			price:$(el).find("span.product-price").first().text(),
+				  			price:parseFloat($(el).find("span.product-price").first().text().replace(',','.')).toFixed(3),
 				  			oldPrice:null
 				  		});
 		});

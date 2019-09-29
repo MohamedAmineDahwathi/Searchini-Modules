@@ -19,8 +19,8 @@ module.exports.test1=async (a)=>{
               url:product.attr("href"),
             mark:"",
             logo:$('body > div.header > nav.navbar.container > div > div.navbar-header > a > img.mob-nav').attr("src"),
-              price:price.last().text().replace(',',''),
-              oldPrice:price.first().text().replace(',','')
+              price:parseFloat(price.last().text().replace(',','')).toFixed(3),
+              oldPrice:parseFloat(price.first().text().replace(',','')).toFixed(3)
           });
     });
   }

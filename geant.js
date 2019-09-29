@@ -22,7 +22,7 @@ module.exports.test1=async (a)=>{
 		  			url:pic.parent().attr("href"),
 					mark:"",
 					logo:logo,
-		  			price:parseFloat($(el).find("span.product-price").text().replace(',','.')),
+		  			price:parseFloat($(el).find("span.product-price").text().replace(',','.')).toFixed(3),
 		  			oldPrice:null
 		  		});
 		});

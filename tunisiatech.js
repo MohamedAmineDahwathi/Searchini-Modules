@@ -2,22 +2,10 @@ const request=require("request-promise");
 const cheerio=require("cheerio");
 
 
-module.exports.test1=async (a)=>{
-    var data=[];
-     
-        var options={ 
-			method: 'GET'
-		    , uri: ` https://www.tunisiatech.tn/tunisiatech?s=${a}`
-		    , gzip: true
-		    ,resolveWithFullResponse: true
-		    };
-        var x=await  request(options)
-        .then( async(response)=>{
-            if(response.statusCode!=200)
-                return;
-            
-            
-            $=cheerio.load(response.body);
+var data=[];
+var maxPage=null;
+var scrapper=body=>{
+    $=cheerio.load(body);
             
            
             logo="https://www.tunisiatech.tn"+$(".header-logo > a > img").attr("src");
@@ -38,6 +26,23 @@ module.exports.test1=async (a)=>{
             });
             
            maxPage=$(".page-list > li").last().prev().text();
+}
+module.exports.test1=async (a)=>{
+    
+     
+        var options={ 
+			method: 'GET'
+		    , uri: ` https://www.tunisiatech.tn/tunisiatech?s=${a}`
+		    , gzip: true
+		    ,resolveWithFullResponse: true
+		    };
+        var x=await  request(options)
+        .then( async(response)=>{
+            if(response.statusCode!=200)
+                return;
+            
+            
+            scrapper(response.body)
            var arrayRequest=[];
 		while((--maxPage)>0){
 			options.uri=`https://www.tunisiatech.tn/tunisiatech?page=${maxPage+1}&s=${a}`;
@@ -53,28 +58,9 @@ module.exports.test1=async (a)=>{
                         return;
                     
                     
-                    $=cheerio.load(response.body);
-                    
-                   
-                    logo="https://www.tunisiatech.tn"+$(".header-logo > a > img").attr("src");
-                    $("div.ajax_block_product").each((i,el)=>{
-                            name=$(el).find(".product-title > a").text();
-                            pic=$(el).find("a.product-thumbnail  > img");
-                            price=$(el).find(".price > span");
-                            data.push({
-                                name:name,
-                                img:pic.attr("src"),
-                                url:pic.parent().attr("href"),
-                                mark:"",
-                                logo:logo,
-                                price:price.text(),
-                                oldPrice:price.parent().prev().prev().prev().text()
-                                });
-                        
-                    });
-							}						
-						);
-					}).catch(error => { 
+                        scrapper(response.body)
+				});
+				}).catch(error => { 
 					console.log(error.message)
 				  });
            

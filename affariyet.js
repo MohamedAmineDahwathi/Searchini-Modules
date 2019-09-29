@@ -16,8 +16,8 @@ var scrapper=body=>{
 					  url:pic.parent().attr("href"),
 					mark:"",
 					logo:"https://www.affariyet.com/img/cms/4.png",
-					  price:parseFloat($(el).find("span.price.product-price").text().replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')),
-					  oldPrice:$(el).find("span.regular-price").text()
+					  price:parseFloat($(el).find("span.price.product-price").text().replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')).toFixed(3),
+					  oldPrice:parseFloat($(el).find("span.regular-price").text().replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')).toFixed(3)
 				  });
 		maxPage=$("ul.page-list > li ").last().prev().text();
 	});

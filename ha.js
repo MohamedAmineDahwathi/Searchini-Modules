@@ -19,15 +19,15 @@ var scrapper=body=>{
                         url:pic.first().parent().attr("href"),
                         mark:"",
                         logo:logo,
-                        price:parseFloat(price.first().text().trim().replace(',','.')),
-                        oldPrice:parseFloat(price.last().text().trim().replace(',','.'))
+                        price:parseFloat(price.first().text().trim().replace(',','.')).toFixed(3),
+                        oldPrice:parseFloat(price.last().text().trim().replace(',','.')).toFixed(3)
                         });}
                 
             });
             maxPage=$("ul.pages > li").last().prev().text()-2;
  }
 module.exports.test1=async (a)=>{
-    console.log(a)
+    
 	var options={ 
 			method: 'GET'
 		    , uri: `https://www.ha.com.tn/catalogsearch/result/?q=${a}`

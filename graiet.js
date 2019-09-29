@@ -14,7 +14,7 @@ var maxPage=null;
 		  			url:pic.attr("href"),
 					  mark:$(el).find('ul.show-brand').text(),
 					  logo:logo,
-		  			price:parseFloat($(el).find("span.woocommerce-Price-amount").text().replace('د.ت','').replace('.','').replace(',','.')),
+		  			price:parseFloat($(el).find("span.woocommerce-Price-amount").text().replace('د.ت','').replace('.','').replace(',','.')).toFixed(3),
 		  			oldPrice:null
 		  		});
 		});

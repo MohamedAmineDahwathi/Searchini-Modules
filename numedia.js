@@ -25,7 +25,7 @@ module.exports.test1=async (a,n=100)=>{
 					 url:pic.parent().attr("href"),
 					 mark:"",
 					 logo:logo,
-					 price:$(el).find(".price").text().trim(),
+					 price:parseFloat($(el).find(".price").text().trim()).toFixed(3),
 					 oldPrice:null
 					});
 			

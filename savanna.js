@@ -6,7 +6,7 @@ const cheerio=require("cheerio");
 module.exports.test1=async (a)=>{
 	var data=[];
 	var options={ method: 'GET'
-	, uri: `https://www.savanna.tn/recherche?s=${a}`
+	, uri: `https://www.savanna.tn/recherche?s=${a}&order=product.price.desc`
 	, gzip: true
 	,  headers: {
 		'X-Requested-With': 'XMLHttpRequest' ,
@@ -28,7 +28,7 @@ module.exports.test1=async (a)=>{
 		  			url:pic.parent().parent().attr("href"),
 		  			mark:"",
 					  logo:"https://www.savanna.tn/"+logo,
-		  			price:$(el).find("span.price").text(),
+		  			price:parseFloat($(el).find("span.price").text().replace(/(\r\n\s|\n|\r|\s)/gm, '').replace(',','.')).toFixed(3),
 		  			oldPrice:null
 		  		});
 		});

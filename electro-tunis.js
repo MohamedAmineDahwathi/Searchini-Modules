@@ -28,8 +28,8 @@ module.exports.test1=async (a,n=150)=>{
                     url:pic.parent().attr("href"),
                     mark:"",
                     logo:logo,
-                    price:parseFloat(price.text().replace(',','.')),           
-                    oldPrice:parseFloat(price.prev().text().replace(',','.'))
+                    price:parseFloat(price.text().replace(',','.')).toFixed(3),           
+                    oldPrice:parseFloat(price.prev().text().replace(',','.')).toFixed(3)
                             
                 });
             }
